@@ -15,3 +15,18 @@ export async function getProduct(slug: string) {
 
   return data;
 }
+
+export async function getFeaturedProducts() {
+  const { data } = await axios.get("/products/featured");
+  return data;
+}
+
+export async function getBestSellerProducts() {
+  const { data } = await axios.get("/products/best-sellers");
+  return data;
+}
+
+export async function getNewArrivalProducts() {
+  const { data } = await axios.get("/products/new-arrivals");
+  return data;
+}

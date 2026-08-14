@@ -3,6 +3,7 @@ import "./globals.css";
 
 import AuthProvider from "../providers/AuthProvider";
 import { CartProvider } from "../providers/CartProvider";
+import { WishlistProvider } from "../providers/WishlistProvider";
 import { Toaster } from "sonner";
 
 import MaintenanceGuard from "@/src/components/layout/MaintenanceGuard";
@@ -30,15 +31,19 @@ export default function RootLayout({
 
           <CartProvider>
 
-            <PublicSettingsProvider>
+            <WishlistProvider>
 
-              <MaintenanceGuard>
+              <PublicSettingsProvider>
 
-                {children}
+                <MaintenanceGuard>
 
-              </MaintenanceGuard>
+                  {children}
 
-            </PublicSettingsProvider>
+                </MaintenanceGuard>
+
+              </PublicSettingsProvider>
+
+            </WishlistProvider>
 
           </CartProvider>
 

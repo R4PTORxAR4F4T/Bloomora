@@ -47,9 +47,7 @@ export async function clearCart() {
 }
 
 export async function mergeGuestCart(items: any[]) {
-  const { data } = await axios.post("/cart/merge", {
-    items,
-  });
+  const { data } = await axios.post("/cart/sync", items);
 
   return data.data;
 }

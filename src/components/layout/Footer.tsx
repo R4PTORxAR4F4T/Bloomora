@@ -13,10 +13,12 @@ export default function Footer() {
           love.
         </p>
 
-        <div className="flex gap-6">
+        <div className="flex flex-wrap gap-6">
           <Link href="/about">About</Link>
 
           <Link href="/contact">Contact</Link>
+
+          <Link href="/faq">FAQ</Link>
 
           <Link href="/privacy">Privacy</Link>
 
