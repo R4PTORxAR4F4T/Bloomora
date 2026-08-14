@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Flower2,
   Gem,
@@ -11,16 +12,11 @@ import {
 } from "lucide-react";
 
 import categoryService from "@/src/services/category.service";
+import { Category } from "@/src/types/category";
 
-interface Category {
-  _id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  active?: boolean;
-}
-
-const ICONS: LucideIcon[] = [Flower2, Gem, Sparkles, Crown];
+// Fallback icons for categories that don't have a custom icon
+// uploaded yet (Admin > Categories > Edit > Category Icon).
+const FALLBACK_ICONS: LucideIcon[] = [Flower2, Gem, Sparkles, Crown];
 
 export default function Categories() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -48,7 +44,7 @@ export default function Categories() {
   }
 
   return (
-    <section className="bg-white py-28">
+    <section className="bg-white py-28 md:px-16">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <span className="text-sm uppercase tracking-[5px] text-[#C49A6C]">
@@ -66,7 +62,7 @@ export default function Categories() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
             {Array.from({ length: 4 }).map((_, index) => (
               <div
                 key={index}
@@ -75,9 +71,10 @@ export default function Categories() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
             {categories.map((category, index) => {
-              const Icon = ICONS[index % ICONS.length];
+              const FallbackIcon =
+                FALLBACK_ICONS[index % FALLBACK_ICONS.length];
 
               return (
                 <Link
@@ -86,10 +83,20 @@ export default function Categories() {
                   className="group flex flex-col items-center gap-4 rounded-3xl border border-[#F0E4D6] bg-[#FBF7F2] px-6 py-10 text-center transition-all duration-500 hover:-translate-y-2 hover:border-[#D6C2AF] hover:shadow-xl"
                 >
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-sm transition group-hover:bg-[#B78A61]">
-                    <Icon
-                      size={26}
-                      className="text-[#C48C75] transition group-hover:text-white"
-                    />
+                    {category.icon?.url ? (
+                      <Image
+                        src={category.icon.url}
+                        alt=""
+                        width={30}
+                        height={30}
+                        className="h-[30px] w-[30px] object-contain"
+                      />
+                    ) : (
+                      <FallbackIcon
+                        size={26}
+                        className="text-[#C48C75] transition group-hover:text-white"
+                      />
+                    )}
                   </div>
 
                   <span className="font-medium text-[#3D2A22]">

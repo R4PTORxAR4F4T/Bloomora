@@ -2,22 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {Edit,Plus,Search,Trash2} from "lucide-react";
 import categoryService from "@/src/services/category.service";
 import DeleteCategoryModal from "./DeleteCategoryModal";
 import { toast } from "sonner";
-
-interface Category {
-  _id: string;
-
-  name: string;
-
-  description: string;
-
-  active: boolean;
-
-  createdAt: string;
-}
+import { Category } from "@/src/types/category";
 
 export default function CategoryTable() {
   const [categories, setCategories] =
@@ -176,6 +166,10 @@ export default function CategoryTable() {
             <tr>
 
               <th className="px-6 py-4 text-left text-sm font-semibold">
+                Icon
+              </th>
+
+              <th className="px-6 py-4 text-left text-sm font-semibold">
                 Name
               </th>
 
@@ -203,6 +197,24 @@ export default function CategoryTable() {
                   key={category._id}
                   className="border-t hover:bg-gray-50"
                 >
+
+                  <td className="px-6 py-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg border bg-gray-50">
+                      {category.icon?.url ? (
+                        <Image
+                          src={category.icon.url}
+                          alt=""
+                          width={24}
+                          height={24}
+                          className="h-6 w-6 object-contain"
+                        />
+                      ) : (
+                        <span className="text-xs text-gray-300">
+                          —
+                        </span>
+                      )}
+                    </div>
+                  </td>
 
                   <td className="px-6 py-4 font-medium">
                     {category.name}
@@ -261,7 +273,7 @@ export default function CategoryTable() {
               <tr>
 
                 <td
-                  colSpan={4}
+                  colSpan={5}
                   className="py-10 text-center text-gray-500"
                 >
                   No categories found.

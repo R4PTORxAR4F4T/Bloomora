@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import categoryService from "@/src/services/category.service";
 import CategoryGeneral from "./CategoryGeneral";
+import CategoryIcon from "./CategoryIcon";
 import CategoryStatus from "./CategoryStatus";
 import CategorySubmit from "./CategorySubmit";
 import { toast } from "sonner";
+import { CategoryIcon as CategoryIconType } from "@/src/types/category";
 
 export interface CategoryFormData {
   name: string;
   description: string;
+  icon?: CategoryIconType;
   active: boolean;
 }
 
@@ -22,6 +25,7 @@ interface Props {
 const initialForm: CategoryFormData = {
   name: "",
   description: "",
+  icon: undefined,
   active: true,
 };
 
@@ -75,6 +79,7 @@ export default function CategoryForm({
         name: category.name,
         description:
           category.description ?? "",
+        icon: category.icon ?? undefined,
         active: category.active,
       });
     } catch (error) {
@@ -139,6 +144,11 @@ export default function CategoryForm({
       className="mx-auto max-w-7xl space-y-6 pb-10"
     >
       <CategoryGeneral
+        form={form}
+        updateField={updateField}
+      />
+
+      <CategoryIcon
         form={form}
         updateField={updateField}
       />

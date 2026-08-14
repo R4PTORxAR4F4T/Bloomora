@@ -1,4 +1,5 @@
 import axios from "@/src/lib/axios";
+import { CategoryIcon } from "@/src/types/category";
 
 class CategoryService {
   async getCategories() {
@@ -21,6 +22,7 @@ class CategoryService {
     name: string;
     description: string;
     active: boolean;
+    icon?: CategoryIcon;
   }) {
     const response = await axios.post(
       "/admin/categories",
@@ -36,6 +38,7 @@ class CategoryService {
       name: string;
       description: string;
       active: boolean;
+      icon?: CategoryIcon;
     }
   ) {
     const response = await axios.patch(

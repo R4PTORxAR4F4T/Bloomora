@@ -8,13 +8,7 @@ import { getProducts } from "@/src/services/product.service";
 import categoryService from "@/src/services/category.service";
 import ProductCard from "@/src/components/product/ProductCard";
 import { Product } from "@/src/types/product";
-
-interface Category {
-  _id: string;
-  name: string;
-  slug: string;
-  active?: boolean;
-}
+import { Category } from "@/src/types/category";
 
 const SORT_OPTIONS = [
   { value: "", label: "Newest" },
