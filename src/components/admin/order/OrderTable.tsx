@@ -4,10 +4,10 @@ import Link from "next/link";
 import { Eye } from "lucide-react";
 import OrderStatusBadge from "./OrderStatusBadge";
 import PaymentStatusBadge from "./PaymentStatusBadge";
-import { Order } from "@/src/types/order";
+import { AdminOrder } from "@/src/types/order";
 
 interface Props {
-  orders: Order[];
+  orders: AdminOrder[];
 
   refresh: () => void;
 }

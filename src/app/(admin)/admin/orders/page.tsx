@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import OrderTable from "@/src/components/admin/order/OrderTable";
-import { Order } from "@/src/types/order";
+import { AdminOrder } from "@/src/types/order";
 import orderService from "@/src/services/order.service";
 
 export default function OrdersPage() {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<AdminOrder[]>([]);
 
   const [loading, setLoading] =
     useState(true);

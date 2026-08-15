@@ -166,3 +166,20 @@ export interface Order {
 
   updatedAt: string;
 }
+
+// The admin order endpoints (list + detail) always populate `user`
+// server-side (see backend order.service.ts), so admin screens can
+// rely on the object shape without a string fallback. Customer-facing
+// order endpoints don't make that guarantee, which is why the base
+// `Order` type above keeps `user` as a union.
+export interface AdminOrder extends Omit<Order, "user"> {
+  user: {
+    _id: string;
+
+    name: string;
+
+    email: string;
+
+    phone?: string;
+  };
+}

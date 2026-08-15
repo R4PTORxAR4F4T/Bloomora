@@ -9,7 +9,7 @@ import PaymentCard from "@/src/components/admin/order/PaymentCard";
 import TrackingCard from "@/src/components/admin/order/TrackingCard";
 import OrderTimeline from "@/src/components/admin/order/OrderTimeline";
 import OrderStatusCard from "@/src/components/admin/order/OrderStatusCard";
-import { Order } from "@/src/types/order";
+import { AdminOrder } from "@/src/types/order";
 import orderService from "@/src/services/order.service";
 
 export default function OrderDetailsPage() {
@@ -21,7 +21,7 @@ export default function OrderDetailsPage() {
     useState(true);
 
   const [order, setOrder] =
-    useState<Order | null>(null);
+    useState<AdminOrder | null>(null);
 
   async function loadOrder() {
     try {

@@ -1,17 +1,17 @@
 import axios from "@/src/lib/axios";
 import {
-  Order,
+  AdminOrder,
   OrderStatus,
   PaymentStatus,
 } from "@/src/types/order";
 
 class OrderService {
-  async getAllOrders(): Promise<Order[]> {
+  async getAllOrders(): Promise<AdminOrder[]> {
     const { data } = await axios.get("/admin/orders");
     return data.data;
   }
 
-  async getOrder(id: string): Promise<Order> {
+  async getOrder(id: string): Promise<AdminOrder> {
     const { data } = await axios.get(
       `/admin/orders/${id}`
     );
