@@ -63,6 +63,16 @@ export interface CustomerDetails {
 
     orderStatus: string;
 
+    payment: {
+      method: string;
+
+      status: string;
+
+      transactionId?: string;
+
+      paidAt?: string;
+    };
+
     createdAt: string;
   }[];
 }

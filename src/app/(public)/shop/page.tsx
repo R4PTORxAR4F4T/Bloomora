@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X } from "lucide-react";
 
 import { getProducts } from "@/src/services/product.service";
 import categoryService from "@/src/services/category.service";
@@ -18,6 +18,8 @@ const SORT_OPTIONS = [
   { value: "rating", label: "Top Rated" },
 ];
 
+const SEARCH_DEBOUNCE_MS = 500;
+
 function ShopContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -31,6 +33,8 @@ function ShopContent() {
   const [loading, setLoading] = useState(true);
 
   const [categories, setCategories] = useState<Category[]>([]);
+
+  const [searchInput, setSearchInput] = useState(search || "");
 
   useEffect(() => {
     async function loadCategories() {
@@ -88,6 +92,32 @@ function ShopContent() {
     router.push(`/shop?${params.toString()}`);
   }
 
+  // Keep the search box in sync when the URL changes from elsewhere
+  // (Clear button, category pills, browser back/forward).
+  useEffect(() => {
+    setSearchInput(search || "");
+  }, [search]);
+
+  // Debounce typing so we're not hitting the API on every keystroke.
+  useEffect(() => {
+    const trimmed = searchInput.trim();
+
+    if (trimmed === (search || "")) {
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      updateParam("search", trimmed);
+    }, SEARCH_DEBOUNCE_MS);
+
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchInput]);
+
+  function commitSearch() {
+    updateParam("search", searchInput.trim());
+  }
+
   function clearFilters() {
     router.push("/shop");
   }
@@ -96,8 +126,43 @@ function ShopContent() {
 
   return (
     <>
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
-        <h1 className="text-5xl font-bold">Shop</h1>
+      <h1 className="mb-6 text-5xl font-bold">Shop</h1>
+
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <div className="relative flex-1">
+          <Search
+            size={18}
+            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+          />
+
+          <input
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                commitSearch();
+              }
+            }}
+            placeholder="Search products..."
+            className="w-full rounded-lg border bg-white py-2.5 pl-11 pr-10 text-sm focus:border-[#B78A61] focus:outline-none"
+          />
+
+          {searchInput && (
+            <button
+              type="button"
+              onClick={() => {
+                setSearchInput("");
+                updateParam("search", "");
+              }}
+              aria-label="Clear search"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-600"
+            >
+              <X size={16} />
+            </button>
+          )}
+        </div>
 
         <div className="flex items-center gap-2">
           <SlidersHorizontal
@@ -158,6 +223,15 @@ function ShopContent() {
         </div>
       )}
 
+      {search && (
+        <p className="mb-6 text-sm text-gray-500">
+          {loading ? "Searching" : `Results`} for{" "}
+          <span className="font-semibold text-[#3D2A22]">
+            "{search}"
+          </span>
+        </p>
+      )}
+
       {loading ? (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {Array.from({ length: 8 }).map((_, index) => (
@@ -181,7 +255,8 @@ function ShopContent() {
           </h2>
 
           <p className="mt-2 text-gray-500">
-            Try a different category or clearing your filters.
+            Try a different search term, category, or clearing your
+            filters.
           </p>
 
           {hasActiveFilters && (

@@ -10,14 +10,14 @@ const collections = [
     description:
       "Delicate handcrafted blossoms designed to bloom beautifully with every outfit.",
     image: "/images/hero-jewelry.png",
-    href: "/shop?category=jewelry",
+    href: "/shop?category=earrings",
   },
   {
-    title: "Jewelry Necklaces",
+    title: "Floral Necklaces",
     description:
-      "Exquisite handmade floral jewelry, perfect for adding a touch of elegance to any ensemble.",
+      "Elegant botanical necklaces inspired by nature's timeless beauty.",
     image: "/images/hero-jewelry.png",
-    href: "/shop?subcategory=necklaces",
+    href: "/shop?category=necklaces",
   },
   {
     title: "Luxury Gift Sets",

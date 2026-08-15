@@ -32,6 +32,13 @@ const orderColors: Record<string, string> = {
   refunded: "bg-pink-100 text-pink-700",
 };
 
+const paymentColors: Record<string, string> = {
+  paid: "bg-green-100 text-green-700",
+  pending: "bg-yellow-100 text-yellow-700",
+  failed: "bg-red-100 text-red-700",
+  refunded: "bg-gray-100 text-gray-700",
+};
+
 export default function CustomerOrdersCard({
   orders,
 }: Props) {
@@ -102,6 +109,16 @@ export default function CustomerOrdersCard({
                   }`}
                 >
                   {order.orderStatus}
+                </span>
+
+                <span
+                  className={`ml-2 mt-2 inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+                    paymentColors[
+                      order.payment?.status || "pending"
+                    ] || "bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  {order.payment?.status || "unpaid"}
                 </span>
 
               </div>
