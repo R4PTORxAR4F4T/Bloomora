@@ -36,7 +36,7 @@ export default function NewArrivals({
 
             return (
               <div
-                key={product._id}
+                key={product._id ?? product.id}
                 className="flex items-center justify-between"
               >
                 <div className="flex items-center gap-4">

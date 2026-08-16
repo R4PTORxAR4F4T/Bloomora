@@ -10,6 +10,7 @@ import {
   LogOut,
   Menu,
   X,
+  LayoutDashboard,
 } from "lucide-react";
 
 import { useAuth } from "@/src/hooks/useAuth";
@@ -227,6 +228,19 @@ export default function Navbar() {
                     My Profile
                   </Link>
 
+                  {user.role === "admin" && (
+                    <Link
+                      href="/admin"
+                      onClick={() =>
+                        setOpen(false)
+                      }
+                      className="flex items-center gap-3 px-4 py-3 transition hover:bg-gray-100"
+                    >
+                      <LayoutDashboard size={18} />
+                      Admin Dashboard
+                    </Link>
+                  )}
+
                   <button
                     onClick={async () => {
                       setOpen(false);
@@ -293,6 +307,17 @@ export default function Navbar() {
                   <User size={18} />
                   My Profile
                 </Link>
+
+                {user.role === "admin" && (
+                  <Link
+                    href="/admin"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-3 rounded-lg px-3 py-3 text-[#2E1910] transition hover:bg-[#F3E8DB]"
+                  >
+                    <LayoutDashboard size={18} />
+                    Admin Dashboard
+                  </Link>
+                )}
 
                 <button
                   onClick={async () => {

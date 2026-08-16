@@ -32,7 +32,7 @@ export default function NewArrivals() {
   }
 
   return (
-    <section className="bg-[#FBF7F2] px-10 py-28">
+    <section className="bg-[#FBF7F2] py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
           <div>

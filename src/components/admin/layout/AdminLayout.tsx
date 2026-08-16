@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 import Sidebar from "./Sidebar";
 import AdminNavbar from "./AdminNavbar";
@@ -12,18 +12,25 @@ interface AdminLayoutProps {
 export default function AdminLayout({
   children,
 }: AdminLayoutProps) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-slate-100">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       {/* Main */}
-      <div className="ml-64 flex min-h-screen flex-col">
+      <div className="flex min-h-screen flex-col md:ml-64">
         {/* Admin Navbar */}
-        <AdminNavbar />
+        <AdminNavbar
+          onMenuClick={() => setSidebarOpen(true)}
+        />
 
         {/* Page Content */}
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 md:p-6">
           {children}
         </main>
       </div>

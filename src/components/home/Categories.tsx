@@ -44,7 +44,7 @@ export default function Categories() {
   }
 
   return (
-    <section className="bg-white px-10 py-28">
+    <section className="bg-white py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <span className="text-sm uppercase tracking-[5px] text-[#C49A6C]">
