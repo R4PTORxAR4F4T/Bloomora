@@ -1,0 +1,3 @@
+GET /api/admin/products still ignores pagination/query params entirely (flagged a few messages back, still true)
+Public GET /api/categories still doesn't filter out inactive categories
+schemas/, constants/, interfaces/ on the backend are still empty stubs; there's no real request validation beyond manual per-field checks in controllers
