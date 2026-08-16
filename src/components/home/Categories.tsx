@@ -44,7 +44,7 @@ export default function Categories() {
   }
 
   return (
-    <section className="bg-white py-28">
+    <section className="bg-white px-10 py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <span className="text-sm uppercase tracking-[5px] text-[#C49A6C]">
@@ -62,7 +62,7 @@ export default function Categories() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
             {Array.from({ length: 4 }).map((_, index) => (
               <div
                 key={index}
@@ -71,7 +71,7 @@ export default function Categories() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
             {categories.map((category, index) => {
               const FallbackIcon =
                 FALLBACK_ICONS[index % FALLBACK_ICONS.length];
