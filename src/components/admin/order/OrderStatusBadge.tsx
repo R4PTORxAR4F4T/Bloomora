@@ -11,6 +11,9 @@ interface Props {
 }
 
 const colors = {
+  pending:
+    "bg-gray-100 text-gray-700",
+    
   confirmed:
     "bg-blue-100 text-blue-700",
 

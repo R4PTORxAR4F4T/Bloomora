@@ -30,7 +30,7 @@ export default function TopRatedProducts({
 
             return (
               <div
-                key={product._id ?? product.id}
+                key={product._id }
                 className="flex items-center justify-between"
               >
                 <div className="flex items-center gap-4">
