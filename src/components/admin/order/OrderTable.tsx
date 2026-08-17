@@ -119,7 +119,7 @@ export default function OrderTable({
 
                   <OrderStatusBadge
                     status={
-                      order.orderStatus
+                      order.orderStatus as "confirmed" | "processing" | "packed" | "shipped" | "delivered" | "cancelled" | "returned" | "refunded"
                     }
                   />
 

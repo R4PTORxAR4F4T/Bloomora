@@ -46,7 +46,7 @@ export default function NewArrivals({
                     width={60}
                     height={60}
                     loading="eager"
-                    className="h-[60px] w-[60px] rounded-lg border object-cover"
+                    className="h-14 w-14 rounded-lg border object-cover"
                   />
 
                   <div>

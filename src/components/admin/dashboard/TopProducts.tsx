@@ -20,7 +20,7 @@ export default function TopProducts({
       <div className="space-y-5">
         {products.map((product) => {
           const image =
-            // product.images?.[0]?.url ||
+            product.images?.[0]?.url ||
             "/images/collections/default-placeholder.png";
 
           const price =
