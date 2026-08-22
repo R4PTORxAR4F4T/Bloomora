@@ -1,5 +1,6 @@
 interface Props {
   status:
+    | "pending"
     | "confirmed"
     | "processing"
     | "packed"
